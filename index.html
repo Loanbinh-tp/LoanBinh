@@ -1754,10 +1754,10 @@ function renderDash(d) {
     ${(() => { const a = d.dueAlerts || { overdue: [], today: [], soon: [] }; const tot = a.overdue.length + a.today.length + a.soon.length; if (!tot) return '';
       const row = (x, label, bad) => `<div style="font-size:13.5px;margin-bottom:5px"><b${bad ? ' class="neg"' : ''}>${label}</b> · <b>${esc(x.code)}</b> — ${esc(x.custName)} · hạn ${esc(x.deadline)} · ${money(x.value)}đ</div>`;
       const days = x => Math.round((new Date(isoDay()) - new Date(x.deadlineDay)) / 86400000);
-      return `<section><h2>${ICO.clock} Nhắc hẹn giao (${tot})</h2>`
+      return `<section><h2>${ICO.clock} Nhắc hẹn giao (${tot}) <button type="button" class="btn-ghost" style="padding:2px 10px;font-size:16px;line-height:1" onclick="var b=this.parentElement.nextElementSibling;var open=b.style.display==='none';b.style.display=open?'':'none';this.textContent=open?'-':'+';">+</button></h2><div style="display:none">`
         + a.overdue.map(x => row(x, '<span style="color:#d92d20">●</span> QUÁ HẠN ' + days(x) + ' ngày', 1)).join('')
         + a.today.map(x => row(x, '<span style="color:#ef6820">●</span> Hạn giao HÔM NAY', 0)).join('')
-        + a.soon.map(x => row(x, '<span style="color:#e6a700">●</span> Hạn giao ngày mai', 0)).join('') + '</section>'; })()}
+        + a.soon.map(x => row(x, '<span style="color:#e6a700">●</span> Hạn giao ngày mai', 0)).join('') + '</div></section>'; })()}
     <section>
       <h2>Tháng ${esc(d.monthLabel)}</h2>
       <div class="kpis">
